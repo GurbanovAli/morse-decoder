@@ -38,7 +38,33 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+		/* полезный код */
+		const arr = expr.match(/.{1,10}/g);
+		const resultArr = arr.map((item) => {
+			if (item === "**********") {
+				return " ";
+			}
+			
+			const byteCharArr = item.match(/.{1,2}/g);
+			const morzeCharArr = byteCharArr.map((item) => {
+				switch (item) {
+					case "00":
+						return "";
+						
+					case "10":
+						return "."
+						
+					case "11":
+						return "-";
+				}
+			});
+			
+			return MORSE_TABLE[morzeCharArr.join("")];
+		});
+		
+		/* полезный код */
+		
+		return resultArr.join("");
 }
 
 module.exports = {
